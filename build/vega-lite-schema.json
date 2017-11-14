@@ -796,6 +796,197 @@
               "$ref": "#/definitions/BinParams"
             }
           ],
+          "description": "The font weight (e.g., `\"bold\"`)."
+        },
+        "interpolate": {
+          "$ref": "#/definitions/Interpolate",
+          "description": "The line interpolation method to use for line and area marks. One of the following:\n- `\"linear\"`: piecewise linear segments, as in a polyline.\n- `\"linear-closed\"`: close the linear segments to form a polygon.\n- `\"step\"`: alternate between horizontal and vertical segments, as in a step function.\n- `\"step-before\"`: alternate between vertical and horizontal segments, as in a step function.\n- `\"step-after\"`: alternate between horizontal and vertical segments, as in a step function.\n- `\"basis\"`: a B-spline, with control point duplication on the ends.\n- `\"basis-open\"`: an open B-spline; may not intersect the start or end.\n- `\"basis-closed\"`: a closed B-spline, as in a loop.\n- `\"cardinal\"`: a Cardinal spline, with control point duplication on the ends.\n- `\"cardinal-open\"`: an open Cardinal spline; may not intersect the start or end, but will intersect other control points.\n- `\"cardinal-closed\"`: a closed Cardinal spline, as in a loop.\n- `\"bundle\"`: equivalent to basis, except the tension parameter is used to straighten the spline.\n- `\"monotone\"`: cubic interpolation that preserves monotonicity in y."
+        },
+        "limit": {
+          "description": "The maximum length of the text mark in pixels (default 0, indicating no limit). The text value will be automatically truncated if the rendered size exceeds the limit.",
+          "type": "number"
+        },
+        "opacity": {
+          "description": "The overall opacity (value between [0,1]).\n\n__Default value:__ `0.7` for non-aggregate plots with `point`, `tick`, `circle`, or `square` marks or layered `bar` charts and `1` otherwise.",
+          "maximum": 1,
+          "minimum": 0,
+          "type": "number"
+        },
+        "orient": {
+          "$ref": "#/definitions/Orient",
+          "description": "The orientation of a non-stacked bar, tick, area, and line charts.\nThe value is either horizontal (default) or vertical.\n- For bar, rule and tick, this determines whether the size of the bar and tick\nshould be applied to x or y dimension.\n- For area, this property determines the orient property of the Vega output.\n- For line, this property determines the sort order of the points in the line\nif `config.sortLineBy` is not specified.\nFor stacked charts, this is always determined by the orientation of the stack;\ntherefore explicitly specified value will be ignored."
+        },
+        "radius": {
+          "description": "Polar coordinate radial offset, in pixels, of the text label from the origin determined by the `x` and `y` properties.",
+          "minimum": 0,
+          "type": "number"
+        },
+        "shape": {
+          "description": "The default symbol shape to use. One of: `\"circle\"` (default), `\"square\"`, `\"cross\"`, `\"diamond\"`, `\"triangle-up\"`, or `\"triangle-down\"`, or a custom SVG path.\n\n__Default value:__ `\"circle\"`",
+          "type": "string"
+        },
+        "size": {
+          "description": "Size of the box and mid tick of a box plot ",
+          "type": "number"
+        },
+        "stroke": {
+          "description": "Default Stroke Color.  This has higher precedence than config.color\n\n__Default value:__ (None)",
+          "type": "string"
+        },
+        "strokeDash": {
+          "description": "An array of alternating stroke, space lengths for creating dashed or dotted lines.",
+          "items": {
+            "type": "number"
+          },
+          "type": "array"
+        },
+        "strokeDashOffset": {
+          "description": "The offset (in pixels) into which to begin drawing with the stroke dash array.",
+          "type": "number"
+        },
+        "strokeOpacity": {
+          "description": "The stroke opacity (value between [0,1]).\n\n__Default value:__ `1`",
+          "maximum": 1,
+          "minimum": 0,
+          "type": "number"
+        },
+        "strokeWidth": {
+          "description": "The stroke width, in pixels.",
+          "minimum": 0,
+          "type": "number"
+        },
+        "tension": {
+          "description": "Depending on the interpolation type, sets the tension parameter (for line and area marks).",
+          "maximum": 1,
+          "minimum": 0,
+          "type": "number"
+        },
+        "text": {
+          "description": "Placeholder text if the `text` channel is not specified",
+          "type": "string"
+        },
+        "theta": {
+          "description": "Polar coordinate angle, in radians, of the text label from the origin determined by the `x` and `y` properties. Values for `theta` follow the same convention of `arc` mark `startAngle` and `endAngle` properties: angles are measured in radians, with `0` indicating \"north\".",
+          "type": "number"
+        }
+      },
+      "type": "object"
+    },
+    "BoxPlotConfigMixins": {
+      "additionalProperties": false,
+      "properties": {
+        "box": {
+          "$ref": "#/definitions/BoxPlotConfig",
+          "description": "Box Config "
+        },
+        "boxMid": {
+          "$ref": "#/definitions/MarkConfig"
+        },
+        "boxWhisker": {
+          "$ref": "#/definitions/MarkConfig"
+        }
+      },
+      "type": "object"
+    },
+    "BrushConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "fill": {
+          "description": "The fill color of the interval mark.\n\n__Default value:__ `#333333`",
+          "type": "string"
+        },
+        "fillOpacity": {
+          "description": "The fill opacity of the interval mark (a value between 0 and 1).\n\n__Default value:__ `0.125`",
+          "type": "number"
+        },
+        "stroke": {
+          "description": "The stroke color of the interval mark.\n\n__Default value:__ `#ffffff`",
+          "type": "string"
+        },
+        "strokeDash": {
+          "description": "An array of alternating stroke and space lengths,\nfor creating dashed or dotted lines.",
+          "items": {
+            "type": "number"
+          },
+          "type": "array"
+        },
+        "strokeDashOffset": {
+          "description": "The offset (in pixels) with which to begin drawing the stroke dash array.",
+          "type": "number"
+        },
+        "strokeOpacity": {
+          "description": "The stroke opacity of the interval mark (a value between 0 and 1).",
+          "type": "number"
+        },
+        "strokeWidth": {
+          "description": "The stroke width of the interval mark.",
+          "type": "number"
+        }
+      },
+      "type": "object"
+    },
+    "CalculateTransform": {
+      "additionalProperties": false,
+      "properties": {
+        "as": {
+          "description": "The field for storing the computed formula value.",
+          "type": "string"
+        },
+        "calculate": {
+          "description": "A string containing a Vega Expression. Use the variable `datum` to refer to the current data object.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "calculate",
+        "as"
+      ],
+      "type": "object"
+    },
+    "Comparator": {
+      "additionalProperties": false,
+      "properties": {
+        "field": {
+          "description": "The field that will be compared",
+          "type": "string"
+        },
+        "order": {
+          "description": "The order in which it will be compared",
+          "enum": [
+            "ascending",
+            "descending"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "field"
+      ],
+      "type": "object"
+    },
+    "CompositeMarkConfigMixins": {
+      "$ref": "#/definitions/BoxPlotConfigMixins"
+    },
+    "CompositeUnitSpec": {
+      "$ref": "#/definitions/CompositeUnitSpecAlias",
+      "description": "Unit spec that can have a composite mark."
+    },
+    "ConditionLegendFieldDef": {
+      "additionalProperties": false,
+      "properties": {
+        "aggregate": {
+          "$ref": "#/definitions/Aggregate",
+          "description": "Aggregation function for the field\n(e.g., `mean`, `sum`, `median`, `min`, `max`, `count`).\n\n__Default value:__ `undefined` (None)"
+        },
+        "bin": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "#/definitions/BinParams"
+            }
+          ],
           "description": "A flag for binning a `quantitative` field, or [an object defining binning parameters](bin.html#params).\nIf `true`, default [binning parameters](bin.html) will be applied.\n\n__Default value:__ `false`"
         },
         "field": {
@@ -5516,6 +5707,9 @@
         },
         {
           "$ref": "#/definitions/AggregateTransform"
+        },
+        {
+          "$ref": "#/definitions/WindowTransform"
         }
       ]
     },
@@ -6251,6 +6445,95 @@
           "type": "number"
         }
       },
+      "type": "object"
+    },
+    "VlOnlyGuideConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "shortTimeLabels": {
+          "description": "Whether month names and weekday names should be abbreviated.\n\n__Default value:__  `false`",
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "WindowFieldDef": {
+      "additionalProperties": false,
+      "properties": {
+        "as": {
+          "description": "The name for the new field in the window transform",
+          "type": "string"
+        },
+        "field": {
+          "description": "The field that will be used in the operation, some operations\ndo not require fields",
+          "type": "string"
+        },
+        "op": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/AggregateOp"
+            },
+            {
+              "$ref": "#/definitions/WindowOnlyOp"
+            }
+          ],
+          "description": "The operations supported for the window aggregation"
+        },
+        "param": {
+          "additionalProperties": false,
+          "description": "The optional parameters for the operation",
+          "type": "object"
+        }
+      },
+      "required": [
+        "op"
+      ],
+      "type": "object"
+    },
+    "WindowOnlyOp": {
+      "enum": [
+        ""
+      ],
+      "type": "string"
+    },
+    "WindowTransform": {
+      "additionalProperties": false,
+      "properties": {
+        "frame": {
+          "description": "The frame for the window, if none is set the default is [null, 0] everything before the\ncurrent item",
+          "items": {
+            "additionalProperties": false,
+            "description": "An object that represents a number of any kind. All JavaScript numbers are 64-bit floating-point numbers. ",
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "groupby": {
+          "description": "The fields to group by",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "ignorePeers": {
+          "description": "Whether to ignoreThePeers during the comparison in the window",
+          "type": "boolean"
+        },
+        "sort": {
+          "$ref": "#/definitions/Comparator",
+          "description": "The comparator to use to determine the window"
+        },
+        "window": {
+          "description": "Array of objects that summarize the fields that will be aggregated over the window",
+          "items": {
+            "$ref": "#/definitions/WindowFieldDef"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "window"
+      ],
       "type": "object"
     }
   }
