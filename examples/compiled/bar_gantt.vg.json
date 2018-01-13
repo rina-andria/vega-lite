@@ -165,6 +165,7 @@
         }
     ],
     "config": {
+        "boxExtent": 1.5,
         "axisY": {
             "minExtent": 30
         }
